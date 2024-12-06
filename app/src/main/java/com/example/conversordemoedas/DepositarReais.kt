@@ -40,10 +40,11 @@ class DepositarReais : AppCompatActivity() {
         updateSaldo(sharedPref)
         salvarButton.setOnClickListener(fun(_) {
             val floatVal = addSaldoEdit.text.toString().toFloat()
-            val current = sharedPref.getFloat("__VALUE_REAIS", 0F)
-            sharedPref.edit().putFloat("__VALUE_REAIS", current + floatVal).apply()
+            val current = sharedPref.getFloat("__VALUE_BRL", 0F)
+            sharedPref.edit().putFloat("__VALUE_BRL", current + floatVal).apply()
             addSaldoEdit.setText("")
             updateSaldo(sharedPref)
+            finish()
         })
 
         addSaldoEdit.addTextChangedListener(object : TextWatcher {
@@ -61,7 +62,7 @@ class DepositarReais : AppCompatActivity() {
     }
 
     fun updateSaldo(sharedPref: SharedPreferences) {
-        val value = sharedPref.getFloat("__VALUE_REAIS", 0F)
+        val value = sharedPref.getFloat("__VALUE_BRL", 0F)
         saldoAtualText.text = "R$" + value.toString()
     }
 }

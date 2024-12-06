@@ -45,15 +45,19 @@ class ListarRecursos : AppCompatActivity() {
     }
 
     fun updateValues() {
-        val valueReais = sharedPref.getFloat("__VALUE_REAIS", 0F)
-        realText.text = "R$" + valueReais.toString()
-        val valueDolar = sharedPref.getFloat("__VALUE_DOLAR", 0F)
-        dolarText.text = "R$" + valueDolar.toString()
-        val valueEuro = sharedPref.getFloat("__VALUE_EURO", 0F)
-        euroText.text = "R$" + valueEuro.toString()
+        val valueReais = sharedPref.getFloat("__VALUE_BRL", 0F)
+        realText.text = "R$" + formatter(valueReais)
+        val valueDolar = sharedPref.getFloat("__VALUE_USD", 0F)
+        dolarText.text = "R$" + formatter(valueDolar)
+        val valueEuro = sharedPref.getFloat("__VALUE_EUR", 0F)
+        euroText.text = "R$" + formatter(valueEuro)
         val valueBtc = sharedPref.getFloat("__VALUE_BTC", 0F)
-        btcText.text = "R$" + valueBtc.toString()
-        val valueEtc = sharedPref.getFloat("__VALUE_ETC", 0F)
-        etcText.text = "R$" + valueEtc.toString()
+        btcText.text = "R$" + formatter(valueBtc)
+        val valueEtc = sharedPref.getFloat("__VALUE_ETH", 0F)
+        etcText.text = "R$" + formatter(valueEtc)
+    }
+
+    fun formatter(value: Float): String {
+        return String.format("%,.6f", value)
     }
 }

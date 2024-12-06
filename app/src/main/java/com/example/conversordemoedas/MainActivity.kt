@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun updateSaldo() {
-        val value = sharedPref.getFloat("__VALUE_REAIS", 0F)
+        val value = sharedPref.getFloat("__VALUE_BRL", 0F)
 
         moneyValueText.text = "R$" + value.toString()
     }
