@@ -16,14 +16,16 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
-        val sharedPref = this.getPreferences(Context.MODE_PRIVATE)
-        val value = sharedPref.getInt("__MONEY_VALUE_REAIS", 0)
-
         val depositarReaisButton: Button = findViewById(R.id.depositarReaisButton)
         val listarRecursosButton: Button = findViewById(R.id.listarRecursosButton)
         val converterRecursosButton: Button = findViewById(R.id.converterRecursosButton)
         val moneyValueText: TextView = findViewById(R.id.moneyValue)
+
+        val sharedPref = this.getPreferences(Context.MODE_PRIVATE)
+        val value = sharedPref.getFloat("__VALUE_REAIS", 0F)
+
         moneyValueText.text = "R$" + value.toString()
+
 
         depositarReaisButton.setOnClickListener(fun (_) {
             val intent = Intent(this, DepositarReais::class.java)
