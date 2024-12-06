@@ -1,7 +1,9 @@
 package com.example.conversordemoedas
 
+import android.app.ComponentCaller
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
@@ -11,6 +13,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 class MainActivity : AppCompatActivity() {
+    lateinit var moneyValueText: TextView
+    lateinit var sharedPref: SharedPreferences
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -19,16 +23,15 @@ class MainActivity : AppCompatActivity() {
         val depositarReaisButton: Button = findViewById(R.id.depositarReaisButton)
         val listarRecursosButton: Button = findViewById(R.id.listarRecursosButton)
         val converterRecursosButton: Button = findViewById(R.id.converterRecursosButton)
-        val moneyValueText: TextView = findViewById(R.id.moneyValue)
+        moneyValueText = findViewById(R.id.moneyValue)
 
-        val sharedPref = this.getPreferences(Context.MODE_PRIVATE)
-        val value = sharedPref.getFloat("__VALUE_REAIS", 0F)
-
-        moneyValueText.text = "R$" + value.toString()
+        sharedPref = this.getSharedPreferences("PREFS", Context.MODE_PRIVATE)
+        updateSaldo()
 
 
         depositarReaisButton.setOnClickListener(fun (_) {
             val intent = Intent(this, DepositarReais::class.java)
+
             startActivity(intent)
         })
         listarRecursosButton.setOnClickListener(fun (_) {
@@ -45,5 +48,16 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        updateSaldo()
+    }
+
+    fun updateSaldo() {
+        val value = sharedPref.getFloat("__VALUE_REAIS", 0F)
+
+        moneyValueText.text = "R$" + value.toString()
     }
 }

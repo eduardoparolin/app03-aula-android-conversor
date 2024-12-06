@@ -27,9 +27,16 @@ class DepositarReais : AppCompatActivity() {
         }
         saldoAtualText = findViewById(R.id.saldoAtualText)
         val salvarButton: Button = findViewById(R.id.salvarButton)
+        salvarButton.isEnabled = false
+        val voltarButton: Button = findViewById(R.id.voltarButton)
+
+        voltarButton.setOnClickListener(fun (_) {
+            finish()
+        })
+
         addSaldoEdit = findViewById(R.id.addSaldoEdit)
 
-        val sharedPref = this.getPreferences(Context.MODE_PRIVATE)
+        val sharedPref = this.getSharedPreferences("PREFS", Context.MODE_PRIVATE)
         updateSaldo(sharedPref)
         salvarButton.setOnClickListener(fun(_) {
             val floatVal = addSaldoEdit.text.toString().toFloat()
