@@ -3,6 +3,7 @@ package com.example.conversordemoedas
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.widget.Button
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -34,6 +35,13 @@ class ListarRecursos : AppCompatActivity() {
         etcText = findViewById(R.id.etcText)
 
         updateValues()
+
+        val voltarButton: Button = findViewById(R.id.voltarButton)
+
+        voltarButton.setOnClickListener(fun (_) {
+            finish()
+        })
+
     }
 
     fun updateValues() {
