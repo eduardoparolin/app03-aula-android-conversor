@@ -21,6 +21,7 @@
         app:layout_constraintVertical_bias="0.087" />
 
     <TextView
+        android:id="@+id/moneyValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="R$22,00"

@@ -1,8 +1,10 @@
 package com.example.conversordemoedas
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -13,9 +15,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
+
+        val sharedPref = this.getPreferences(Context.MODE_PRIVATE)
+        val value = sharedPref.getInt("__MONEY_VALUE_REAIS", 0)
+
         val depositarReaisButton: Button = findViewById(R.id.depositarReaisButton)
         val listarRecursosButton: Button = findViewById(R.id.listarRecursosButton)
         val converterRecursosButton: Button = findViewById(R.id.converterRecursosButton)
+        val moneyValueText: TextView = findViewById(R.id.moneyValue)
+        moneyValueText.text = "R$" + value.toString()
 
         depositarReaisButton.setOnClickListener(fun (_) {
             val intent = Intent(this, DepositarReais::class.java)
